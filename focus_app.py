@@ -64,6 +64,13 @@ def track_countdown(r_i_s):
 
 # lazy function to install missing modules
 def setup():
+
+    # change working directory to location of python script
+    abspath = path.abspath(__file__)
+    dname = path.dirname(abspath)
+    chdir(dname)
+
+    # cheat to install modules because I have a life
     with open("setup.json", "r") as f:
         setup_details = json.load(f)
         if setup_details["fresh"]:
