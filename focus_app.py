@@ -1,0 +1,66 @@
+from time import sleep
+from pyautogui import hotkey
+from sys import stdout, argv
+from threading import Thread
+from os import chdir, path, system
+from win11toast import toast
+
+
+def main():
+
+    # clear terminal and prompt for time
+    system("cls")
+    chdir(path.dirname(argv[0]))
+    print("Welcome to \"Focus App\", how long would you like to focus before a break?")
+    total_time = int(input("Enter time (in minutes): "))
+    print("Timer set!")
+    remaining_in_s = total_time * 60 # convert time to seconds for sleep function
+    
+    system("cls") # clear terminal
+
+    # create new thread to run countdown to avoid timing discrepencies
+    countdown = Thread(target=lambda: track_countdown(remaining_in_s))
+    countdown.start() # start the thread (tracking the countdown)
+
+    # sleep for inputted seconds
+    sleep(remaining_in_s)
+    countdown.join() # join the thread so the screen doesn't clear before the timer has finished
+    print("Break time!")
+    hotkey("winleft", "d") # minimize all windows
+
+    # send notification on break time
+    toast("You are now on break time! - Focus App", "To return reopen the terminal session.")
+    system("cls")
+
+    # prompt to restart
+    if input("Start again? (Y/n)").upper() == "Y":
+        main()
+    else:
+        print("Exiting...")
+        system("cls")
+
+# convert total number of seconds to an f-string that looks pretty
+def sec_to_str(sec):
+    total_min = sec // 60
+    total_hour = total_min // 60
+    disp_min = total_min - (total_hour * 60)
+    disp_sec = sec - (total_min * 60)
+    return f"{"0" if total_hour < 10 else ""}{total_hour}:{"0" if disp_min < 10 else ""}{disp_min}:{"0" if disp_sec < 10 else ""}{disp_sec}s"
+
+# function to keep track of how much time remains concurrently
+def track_countdown(r_i_s):
+    left = r_i_s
+    while left >= 0:
+        
+        # clear previous line
+        stdout.write("\x1b[1A")
+        stdout.write("\x1b[2K")
+
+        # print out current time remaining and decrement
+        print(f"Time remaining: {sec_to_str(left)}")
+        sleep(1)
+        left -= 1
+
+
+if __name__ == "__main__":
+    main()
