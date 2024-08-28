@@ -8,7 +8,19 @@ This is a personal project to improve my productivity.
 
 ### Getting Started:
 
-_Note: This is designed on_ `Python 3.12.5`, _and may not support previous versions. If you don't have_ `python3` _installed already, it is required to run this program. Once installed you can run_ `python --version ` _or_ `python3 --version` _to check if you are on the recommended version._
+_Note: This is designed on_ `Python 3.12.5`, _and may not support previous versions. If you don't have_ `python3` _installed already, it is required to run this program. Once installed you can run_
+
+```diff
+python --version
+```
+
+_or_
+
+```diff
+python3 --version
+```
+
+_to check if you are on the recommended version._
 
 1. Download the zip archive.
 2. Extract the files into a directory of your choice.
