@@ -4,9 +4,7 @@ A simple command line application to set timers to help with focusing on tasks.
 
 This is a personal project to improve my productivity.
 
-```diff
-- Only Windows 10/11 supported for now, MacOS/Linux coming soon
-```
+**Only Windows 10/11 supported for now, MacOS/Linux coming soon!**
 
 ### Getting Started:
 
