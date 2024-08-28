@@ -4,13 +4,13 @@ from sys import stdout, argv
 from threading import Thread
 from os import chdir, path, system
 from win11toast import toast
+import json
 
 
 def main():
 
     # clear terminal and prompt for time
     system("cls")
-    chdir(path.dirname(argv[0]))
     print("Welcome to \"Focus App\", how long would you like to focus before a break?")
     total_time = int(input("Enter time (in minutes): "))
     print("Timer set!")
@@ -61,6 +61,23 @@ def track_countdown(r_i_s):
         sleep(1)
         left -= 1
 
+# lazy function to install missing modules
+def setup():
+    with open("setup.json", "r") as f:
+        setup_details = json.load(f)
+        if setup_details["fresh"]:
+            for mod in setup_details["modules"]:
+                print("Attempting to install module with \"python\":", mod)
+                system(f"python -m pip install {mod}")
+                print("Attempting to install module with \"python3\":", mod)
+                system(f"python3 -m pip install {mod}")
+            setup_details["fresh"] = False
+            with open("setup.json", "w") as f:
+                f.write(json.dumps(setup_details))
+            
+            print("\nAll modules installed!")
+            sleep(1)
 
 if __name__ == "__main__":
+    setup()
     main()
