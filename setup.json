@@ -1,1 +1,1 @@
-{ "fresh": true, "modules": ["pyautogui", "win11toast"] }
+{"fresh": false, "modules": ["pyautogui", "win11toast"]}
