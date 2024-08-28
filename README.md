@@ -3,7 +3,8 @@
 A simple command line application to set timers to help with focusing on tasks.
 
 This is a personal project to improve my productivity.
-<span style="color:red">~ Only Windows 10/11 supported for now, MacOS/Linux coming soon ~</span>
+
+**Only Windows 10/11 supported for now, MacOS/Linux coming soon!**
 
 ### Getting Started:
 

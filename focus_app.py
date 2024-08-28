@@ -12,9 +12,10 @@ def main():
     # clear terminal and prompt for time
     system("cls")
     print("Welcome to \"Focus App\", how long would you like to focus before a break?")
-    total_time = int(input("Enter time (in minutes): "))
+    total_time_min = int(input("Enter time (in minutes): "))
+    total_time_sec = int(input("Enter time (in seconds): "))
     print("Timer set!")
-    remaining_in_s = total_time * 60 # convert time to seconds for sleep function
+    remaining_in_s = (total_time_min * 60) + total_time_sec # convert time to seconds for sleep function
     
     system("cls") # clear terminal
 
